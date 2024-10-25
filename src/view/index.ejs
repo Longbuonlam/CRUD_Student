@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <Link rel="stylesheet" type="text/css" href="/home.css">
+  <title>Student Management</title>
+</head>
+
+<body>
+  <h1>Danh sách Sinh Viên</h1>
+  <a href="/add" class="add-button">Thêm Sinh Viên</a>
+<table class="student-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Birthday</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% students.forEach(student => { %>
+        <tr>
+            <td><%= student.Name %></td>
+            <td><%= student.Address %></td>
+            <td><%= student.Birthday.toISOString().split('T')[0] %></td>
+            <td>
+                <a href="/edit/<%= student._id %>" class="edit-button">Edit</a>
+                <form action="/delete" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<%= student._id %>">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+</body>
+</html>
